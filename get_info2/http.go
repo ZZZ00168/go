@@ -11,6 +11,7 @@ func fetch (url string) string {
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36")
+	req.Header.Set("Content-Type", "text/html; charset=utf-8")
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("Http get err:", err)

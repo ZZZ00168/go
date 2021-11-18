@@ -6,7 +6,7 @@ import (
 )
 func main() {
         start := time.Now()
-        parseUrls("http://www.pornhub.com")
+        parseUrls("http://a.0516meiya.com")
         elapsed := time.Since(start)
         fmt.Printf("Took %s", elapsed)
 }
