@@ -1,3 +1,55 @@
+var oContainer = document.getElementById("container");
+var aImg = oContainer.getElementsByTagName("img");
+var aLi = oContainer.getElementsByTagName("li");
+var oNext = document.getElementById("next");
+var oPrev = document.getElementById("prev");
+var iZIndex = 4;
+var iNow = 0;
+for (var i = 0; i < aLi.length; i++) {
+    aImg[i].style.zIndex = aImg.length - i;
+    aLi[i].index = i;
+    aLi[i].onmouseover = function () {
+        changeImg(this.index);
+        iNow = this.index;
+    }
+}
+function changeImg(index) {
+    for (var i = 0; i < aLi.length; i++) {
+        aLi[i].className = "";
+    }
+    aLi[index].className = "select";
+    var oImg = aImg[index];
+    oImg.style.opacity = 0;
+    oImg.style.filter = 'alpha(opacity=0)';//兼容IE
+    oImg.style.zIndex = ++iZIndex;
+    animate(oImg, {opacity: 100});
+}
+oNext.onclick = function () {
+    iNow++;
+    if (iNow == aLi.length) {
+        iNow = 0;
+    }
+    changeImg(iNow);
+};
+oPrev.onclick = function () {
+    iNow--;
+    if (iNow == -1) {
+        iNow = aLi.length - 1;
+    }
+    changeImg(iNow);
+};
+timer = setInterval(function () {
+    oNext.onclick();
+}, 1000);
+oContainer.onmouseover = function () {
+    clearInterval(timer);
+};
+oContainer.onmouseout = function () {
+    timer = setInterval(function () {
+        oNext.onclick();
+    }, 1000);
+}
+
 function animate(elem, attr, callback){
 	clearInterval(elem.timer);
 	elem.timer = setInterval(function(){
