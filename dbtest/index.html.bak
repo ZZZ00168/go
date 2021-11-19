@@ -8,10 +8,9 @@
 <body>
  
 {{ range $v := .res}}
-	<p>{{ $v.Id }}</p>
-	<p>{{ $v.Name }}</p>
-	<p>{{ $v.Age }}</p>
-	<p>{{ $v.Addtime }}</p>
+	<a href={{ $v.Video_url}}>{{ $v.Video_url}} </a>
+	<p>{{ $v.Pic_url }}</p>
+	<p>{{ $v.Title }}</p>
 {{ end }}
  
 </body>
