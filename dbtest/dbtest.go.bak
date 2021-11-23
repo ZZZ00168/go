@@ -11,9 +11,9 @@ import (
 )
  
 type UrlData struct {
-	Video_url      int    `json:"Video_url"`
+	Video_url      string    `json:"Video_url"`
 	Pic_url    string `json:"Pic_url"`
-	Title     int    `json:"Title"`
+	Title     string    `json:"Title"`
 }
  
 func Index(c *gin.Context) {
@@ -31,11 +31,9 @@ func Index(c *gin.Context) {
 		log.Fatal(errq.Error)
 		return
 	}
-	log.Printf("run2")
  
 	var urls []UrlData
 	
-
 	for rows.Next() {
 		var u UrlData
         
@@ -47,13 +45,13 @@ func Index(c *gin.Context) {
 		urls = append(urls, u)
 	}
  	
-	log.Printf("run3")
 	c.HTML(http.StatusOK, "index.html", gin.H{"res": urls})
  
 }
 
 func main() {
 	r := gin.Default()
+	r.StaticFS("/static", http.Dir("./static"))
 	r.LoadHTMLGlob("index.html")
 	r.GET("/", Index)
 	r.Run(":9090")

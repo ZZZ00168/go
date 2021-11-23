@@ -25,17 +25,15 @@ func Index(c *gin.Context) {
 		return
 	}
 
-	rows, errq := db.Query("select video_url,pic_url,title from url")
+	rows, errq := db.Query("select video_url,pic_url,title from url limit 10")
 	if errq != nil {
 		log.Printf("error:")
 		log.Fatal(errq.Error)
 		return
 	}
-	log.Printf("run2")
  
 	var urls []UrlData
 	
-
 	for rows.Next() {
 		var u UrlData
         
@@ -47,13 +45,13 @@ func Index(c *gin.Context) {
 		urls = append(urls, u)
 	}
  	
-	log.Printf("run3")
 	c.HTML(http.StatusOK, "index.html", gin.H{"res": urls})
  
 }
 
 func main() {
 	r := gin.Default()
+	r.StaticFS("/static", http.Dir("./static"))
 	r.LoadHTMLGlob("index.html")
 	r.GET("/", Index)
 	r.Run(":9090")

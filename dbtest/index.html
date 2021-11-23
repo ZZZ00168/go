@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/index.css">
     <title>index</title>
 </head>
 <body>
  
 {{ range $v := .res}}
-	<a href={{ $v.Video_url}}>{{ $v.Video_url}}</a>
-	<p>{{ $v.Pic_url }}</p>
-	<p>{{ $v.Title }}</p>
+	<div class="outBox">
+		<div class="picBox">
+			<a href={{ $v.Video_url}}>
+				<img src={{ $v.Pic_url }}/>
+			</a>
+		</div>
+		<div class="titleBox">
+			<p>{{ $v.Title }}</p>
+		</div>
+	</div>
 {{ end }}
  
 </body>
