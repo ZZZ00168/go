@@ -67,7 +67,7 @@ func Index(c *gin.Context) {
 		urls = append(urls, u)
 	}
  	
-	c.HTML(http.StatusOK, "index.html", gin.H{"res": urls})
+	c.HTML(http.StatusOK, "index.html", gin.H{"res": urls, "pageIndex": pageIndex})
  
 }
 

@@ -20,6 +20,22 @@
 		</div>
 	</div>
 {{ end }}
+
+<p>当前页数 {{.pageIndex}} </p>
+<a class="nextPageLink"/>
+
+<script>
+	var localUrl;
+	localUrlHost = window.location.host;
+	nextPageUrl = localUrlHost + "?page=" + (parseInt({{.pageIndex}}) + 1);
+
+	var ele = parent.getElementsByTagName('*');
+	for(var i = 0; i < ele.length; i++){
+		if(ele[i].className == "nextPageLink"){
+			ele[i].src=nextPageUrl;
+		}
+	}
+/</script>
  
 </body>
 </html>
